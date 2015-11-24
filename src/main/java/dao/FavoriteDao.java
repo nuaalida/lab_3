@@ -1,5 +1,5 @@
 package dao;
 
-public class FavoriteDao {
+public class FavoriteDao extends BaseDao {
 
 }

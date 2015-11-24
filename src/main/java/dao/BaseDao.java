@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class BaseDao {
+	
 	public Connection getConection() {
 		Connection conn = null;
 		try {

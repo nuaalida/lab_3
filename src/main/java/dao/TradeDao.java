@@ -1,5 +1,5 @@
 package dao;
 
-public class TradeDao {
+public class TradeDao extends BaseDao {
 
 }
