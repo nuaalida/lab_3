@@ -27,11 +27,67 @@
             </result>
         </action>
         
-        <action name="addGood" class="action.GoodAction" method="addGood">
+        <action name="addgood" class="action.GoodAction" method="addGood">
             <interceptor-ref name="json">
             </interceptor-ref>
             <result type="json">
                 <param name="root">dataMap</param>
+            </result>
+        </action>
+        
+        <action name="goodlistoftype" class="action.GoodAction" method="goodListOfType">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataList</param>
+            </result>
+        </action>
+        
+        <action name="addfavorite" class="action.FavoriteAction" method="addFavorite">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        
+        <action name="favoritelist" class="action.FavoriteAction" method="favoriteList">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataList</param>
+            </result>
+        </action>
+        
+        <action name="addtrade" class="action.TradeAction" method="addTrade">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        
+        <action name="tradelist" class="action.TradeAction" method="tradeList">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataList</param>
+            </result>
+        </action>
+        
+        <action name="addevaluation" class="action.EvaluationAction" method="addEvaluation">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        
+        <action name="evaluationlist" class="action.EvaluationAction" method="evaluationList">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataList</param>
             </result>
         </action>
         

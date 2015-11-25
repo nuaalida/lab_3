@@ -8,6 +8,15 @@ public class Evaluation {
 	private String e_text;
 	private Date e_time;
 	
+	public Evaluation(){}
+	
+	public Evaluation(int g_id,String u_name,String e_text,Date e_time){
+		setG_id(g_id);
+		setU_name(u_name);
+		setE_text(e_text);
+		setE_time(e_time);
+	}
+	
 	public int getG_id() {
 		return g_id;
 	}

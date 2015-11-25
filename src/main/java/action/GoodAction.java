@@ -1,6 +1,8 @@
 package action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -11,6 +13,7 @@ import dao.GoodDao;
 public class GoodAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
+	private List<Good> dataList = new ArrayList<Good>();
 	private int g_id;
 	private String g_name;
 	private String g_price;
@@ -19,6 +22,11 @@ public class GoodAction extends ActionSupport {
 	private String g_type;
 	private String u_name;
 	
+	public String goodListOfType() {
+		GoodDao gDao = new GoodDao();
+		dataList = gDao.getGoodList("g_type", g_type);
+		return SUCCESS;
+	}
 	
 	public String addGood() {
 		int result = 1;
@@ -114,18 +122,20 @@ public class GoodAction extends ActionSupport {
 		this.dataMap = dataMap;
 	}
 
-	/**
-	 * @return the g_id
-	 */
 	public int getG_id() {
 		return g_id;
 	}
 
-	/**
-	 * @param g_id the g_id to set
-	 */
 	public void setG_id(int g_id) {
 		this.g_id = g_id;
+	}
+
+	public List<Good> getDataList() {
+		return dataList;
+	}
+
+	public void setDataList(List<Good> dataList) {
+		this.dataList = dataList;
 	}
 	
 }

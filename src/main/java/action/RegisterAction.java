@@ -31,7 +31,7 @@ public class RegisterAction extends ActionSupport  {
 			result = 0;
 			error = "Username is used.";
 		}
-		else if (u_pass.equals(u_repass) == false) {
+		else if (u_pass == null || u_pass.equals(u_repass) == false) {
 			result = 0;
 			error = "Twice passwords are different.";
 		}

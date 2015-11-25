@@ -8,7 +8,7 @@ public class Favorite {
 	
 	public Favorite(int id, String name) {
 		setG_id(id);
-		u_name = name;
+		setU_name(name);
 	}
 
 	public String getU_name() {

@@ -27,7 +27,7 @@ public class LoginAction extends ActionSupport {
 			result = 0;
 			error = "Username doesn't exist.";
 		}
-		else if (user.getU_pass().equals(u_pass) == false) {
+		else if (user.getU_pass()==null || user.getU_pass().equals(u_pass) == false) {
 			result = 0;
 			error = "Username doesn't match password.";
 		}

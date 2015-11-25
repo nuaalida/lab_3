@@ -1,15 +1,42 @@
 package dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import bean.Good;
 
 public class GoodDao extends BaseDao {
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
+	
+	public List<Good> getGoodList(String key, String value) {
+		List<Good> list = null;
+		String sql = "select * from good where " + key + " = " + value;
+		
+		try {
+			conn = this.getConection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			int count = 0;
+			while (rs.next()) {
+				if (count == 0) {
+					list = new ArrayList<Good>();
+				}
+				Good g = new Good(rs.getString("g_name"),
+						rs.getString("g_price"),rs.getString("g_pic"),
+						rs.getInt("g_ammount"),rs.getString("g_type"),
+						rs.getString("u_name"));
+				g.setG_id(rs.getInt("g_id"));
+				list.add(g);
+			}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.closeAll(conn, pstmt, rs);
+		}
+		
+		return list;
+	}
 	
 	public Good getGoodById(int g_id){
 		Good g = null;

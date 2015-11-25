@@ -1,13 +1,8 @@
 package dao;
 
-import java.sql.*;
-
 import bean.User;
 
 public class UserDao extends BaseDao {
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	ResultSet rs = null;
 	
 	public User getUserByName(String u_name){
 		User u = null;
