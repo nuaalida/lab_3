@@ -12,11 +12,28 @@
     <package name="main"  extends="struts-default, json-default">
     
         <action name="register" class="action.RegisterAction" method="register">
+            <interceptor-ref name="json">
+            </interceptor-ref>
             <result type="json">
                 <param name="root">dataMap</param>
             </result>
         </action>
-    
+        
+        <action name="login" class="action.LoginAction" method="login">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        
+        <action name="addGood" class="action.GoodAction" method="addGood">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
         
         <!--//异常配置
         <default-action-ref name="index" />

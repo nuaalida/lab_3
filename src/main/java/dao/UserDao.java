@@ -9,9 +9,9 @@ public class UserDao extends BaseDao {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 	
-	public User getUserByName(int name){
+	public User getUserByName(String u_name){
 		User u = null;
-		String sql = "select * from user where id = " + name;
+		String sql = "select * from user where u_name = " + u_name;
 		try {
 			conn = this.getConection();
 			pstmt = conn.prepareStatement(sql);

@@ -9,6 +9,19 @@ public class Good {
 	private String g_type;
 	private String u_name;
 
+	public Good() {
+	
+	}
+	
+	public Good(String name,String price,String pic,int amount,String type,String uname) {
+		g_name = name;
+		g_price = price;
+		g_pic = pic;
+		g_amount =amount;
+		g_type = type;
+		u_name = uname;
+	}
+	
 	public int getG_id() {
 		return g_id;
 	}

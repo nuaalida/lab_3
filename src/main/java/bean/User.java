@@ -7,6 +7,15 @@ public class User {
 	private String u_pay;
 	private String u_pass;
 	
+	public User() {}
+	
+	public User(String name, String pic, String pay, String pass) {
+		u_name = name;
+		u_pic = pic;
+		u_pay = pay;
+		u_pass = pass;
+	}
+	
 	public int getU_id() {
 		return u_id;
 	}
