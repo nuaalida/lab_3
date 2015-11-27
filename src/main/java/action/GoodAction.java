@@ -24,7 +24,7 @@ public class GoodAction extends ActionSupport {
 	
 	public String goodListOfType() {
 		GoodDao gDao = new GoodDao();
-		dataList = gDao.getGoodList("g_type", g_type);
+		dataList = gDao.getGoodListByType("g_type", g_type);
 		System.out.println(g_type);
 		return SUCCESS;
 	}

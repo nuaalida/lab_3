@@ -7,6 +7,26 @@ import bean.Favorite;
 
 public class FavoriteDao extends BaseDao {
 	
+	public int checkFavorite(int g_id, String u_name) {
+		int result = 0;
+		String sql = "select * from favorite where g_id=" + g_id + " and "
+					+"u_name = \"" + u_name +"\"";
+		try {
+			conn = this.getConection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = 1;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.closeAll(conn, pstmt, rs);
+		}
+		return result;
+	}
+	
 	public List<Integer> getFavoriteList(String key,String value) {
 		List<Integer> list = null;
 		String sql = "select * from favorite where " + key + " = \"" + value + "\"";
@@ -63,6 +83,23 @@ public class FavoriteDao extends BaseDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, f.getG_id());
 			pstmt.setString(2, f.getU_name());
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.closeAll(conn, pstmt, rs);
+		}
+		return result;
+	}
+	
+	public int cancelFavorite(int g_id, String u_name) {
+		int result = 0;
+		String sql = "delete from favorite where g_id=" + g_id + " and "
+					+"u_name = \"" + u_name +"\"";
+		try {
+			conn = this.getConection();
+			pstmt = conn.prepareStatement(sql);
 			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {

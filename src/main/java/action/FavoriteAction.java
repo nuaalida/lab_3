@@ -30,14 +30,26 @@ public class FavoriteAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String checkFavorite() {
+		String error = null;
+		
+		FavoriteDao fDao = new FavoriteDao();
+		int result = fDao.checkFavorite(g_id, u_name);
+		
+		dataMap.clear();
+		dataMap.put("result",result);
+		dataMap.put("error", error);
+		return SUCCESS;
+	}
+	
 	public String addFavorite() {
-		// validate 
+		// validate
 		// addUser
 		int result = 1;
 		String error = null;
-		Favorite f = null;
+		
 		FavoriteDao fDao = new FavoriteDao();
-		f = fDao.getFavoriteByName(u_name);
+		Favorite f = fDao.getFavoriteByName(u_name);
 		
 		if (f != null) {
 			result = 0;
@@ -54,7 +66,19 @@ public class FavoriteAction extends ActionSupport {
 		
 		return SUCCESS;
 	}
-
+	
+	public String cancelFavorite() {
+		FavoriteDao fDao = new FavoriteDao();
+		
+		int result = fDao.cancelFavorite(g_id, u_name);
+		String error = null;
+		
+		dataMap.clear();
+		dataMap.put("result",result);
+		dataMap.put("error", error);
+		return SUCCESS;
+	}
+	
 	public Map<String, Object> getDataMap() {
 		return dataMap;
 	}

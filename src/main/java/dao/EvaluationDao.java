@@ -10,7 +10,7 @@ public class EvaluationDao extends BaseDao {
 	public Evaluation getEvaluationByIdAndName(int g_id, String u_name) {
 		Evaluation e = null;
 		String sql = "select * from evaluation where u_name = \"" + u_name + 
-						"\" and g_id = \"" + g_id +"\"";
+						"\" and g_id = " + g_id;
 		try {
 			conn = this.getConection();
 			pstmt = conn.prepareStatement(sql);
@@ -35,9 +35,9 @@ public class EvaluationDao extends BaseDao {
 	
 	public List<EvaluationPojo> getEvaluationList(String key,String value) {
 		List<EvaluationPojo> list = null;
-		String sql = "select e.g_id, e.u_name, e.e_text, e.e_time, u.u_pic" +
-					"from evaluation e, user u" +
-					"where e." + key + "= \"" + value + "\" and" +
+		String sql = "select e.g_id, e.u_name, e.e_text, e.e_time, u.u_pic " +
+					"from evaluation e, user u " +
+					"where e." + key + " = " + value + " and " +
 					"e.u_name = u.u_name";
 		
 		try {

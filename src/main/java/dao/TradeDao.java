@@ -8,6 +8,27 @@ import pojo.TradePojo;
 
 public class TradeDao extends BaseDao {
 	
+	public int checkTrade(int g_id, String u_name) {
+		int result = 0;
+		String sql = "select * from trade where g_id=" + g_id + " and "
+					+"u_name = \"" + u_name +"\"";
+		try {
+			conn = this.getConection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = 1;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.closeAll(conn, pstmt, rs);
+		}
+		System.out.println(0);
+		return result;
+	}
+	
 	public List<TradePojo> getTradeList(String key, String value) {
 		List<TradePojo> list = null;
 		String sql = "select t.g_id, t.t_color, t.t_count, t.t_type, t.t_time," +

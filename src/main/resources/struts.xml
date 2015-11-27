@@ -9,7 +9,13 @@
     <constant name="struts.i18n.reload" value="true" />
     <constant name="struts.configuration.xml.reload" value="true" ></constant>
 
-    <package name="main" namespace="/" extends="json-default">
+    <package name="main" namespace="/" extends="struts-default, json-default">
+    
+        <action name="image" class="action.ImageUploadAction" method="upload">
+            <result >
+                <param name="root">dataMap</param>
+            </result>
+        </action>
     
         <action name="register" class="action.RegisterAction" method="register">
             <interceptor-ref name="json">
@@ -43,7 +49,23 @@
             </result>
         </action>
         
+        <action name="checkfavorite" class="action.FavoriteAction" method="checkFavorite">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        
         <action name="addfavorite" class="action.FavoriteAction" method="addFavorite">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        
+        <action name="cancelfavorite" class="action.FavoriteAction" method="cancelFavorite">
             <interceptor-ref name="json">
             </interceptor-ref>
             <result type="json">
@@ -60,6 +82,14 @@
         </action>
         
         <action name="addtrade" class="action.TradeAction" method="addTrade">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        
+        <action name="checktrade" class="action.TradeAction" method="checkTrade">
             <interceptor-ref name="json">
             </interceptor-ref>
             <result type="json">

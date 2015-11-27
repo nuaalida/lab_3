@@ -7,7 +7,7 @@ import bean.Good;
 
 public class GoodDao extends BaseDao {
 	
-	public List<Good> getGoodList(String key, String value) {
+	public List<Good> getGoodListByType(String key, String value) {
 		List<Good> list = null;
 		String sql = "select * from good where " + key + " = \"" + value +"\"";
 		

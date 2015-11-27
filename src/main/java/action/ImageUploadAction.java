@@ -23,8 +23,11 @@ public class ImageUploadAction extends ActionSupport {
 		else {
 			destDir = "I:\\blank\\goodimage\\";
 		}
-
-	    uploadUtil(fileName, fileData, destDir);
+		
+		String[] array = fileName.split("\\.");
+		String fileType = array[array.length-1];
+		
+	    uploadUtil(fileType, fileData, destDir);
 
 	    return SUCCESS;
 	}
@@ -32,10 +35,9 @@ public class ImageUploadAction extends ActionSupport {
 	private String uploadUtil(String fileType,String fileData,String destDir){
 		
 		Date date = new Date();
-		String dirName = new SimpleDateFormat("yyyyMMdd").format(date);
 		String newFileName = new SimpleDateFormat("yyyyMMddHHmmss_SSS").format(date);
 		
-		String dirPath = destDir+dirName;
+		String dirPath = destDir;
 		File dir = new File(dirPath);
 		if(!dir.exists()  && !dir.isDirectory()){
 			dir.mkdir();
@@ -78,13 +80,9 @@ public class ImageUploadAction extends ActionSupport {
 	public void setFileData(String fileData) {
 		this.fileData = fileData;
 	}
-
-
 	public String getType() {
 		return type;
 	}
-
-
 	public void setType(String type) {
 		this.type = type;
 	}
