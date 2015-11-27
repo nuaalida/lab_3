@@ -9,7 +9,7 @@
     <constant name="struts.i18n.reload" value="true" />
     <constant name="struts.configuration.xml.reload" value="true" ></constant>
 
-    <package name="main"  extends="struts-default, json-default">
+    <package name="main" namespace="/" extends="json-default">
     
         <action name="register" class="action.RegisterAction" method="register">
             <interceptor-ref name="json">

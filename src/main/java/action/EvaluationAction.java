@@ -10,11 +10,12 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import bean.Evaluation;
 import dao.EvaluationDao;
+import pojo.EvaluationPojo;
 
 public class EvaluationAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
-	private List<Evaluation> dataList = new ArrayList<Evaluation>();
+	private List<EvaluationPojo> dataList = new ArrayList<EvaluationPojo>();
 	private int g_id;
 	private String u_name;
 	private String e_text;
@@ -90,15 +91,15 @@ public class EvaluationAction extends ActionSupport {
 	/**
 	 * @return the dataList
 	 */
-	public List<Evaluation> getDataList() {
+	public List<EvaluationPojo> getDataList() {
 		return dataList;
 	}
 
 
 	/**
-	 * @param dataList the dataList to set
+	 * @param list the dataList to set
 	 */
-	public void setDataList(List<Evaluation> dataList) {
-		this.dataList = dataList;
+	public void setDataList(List<EvaluationPojo> list) {
+		this.dataList = list;
 	}
 }

@@ -24,14 +24,14 @@ public class RegisterAction extends ActionSupport  {
 		int result = 1;
 		String error = null;
 		UserDao userDao = new UserDao();
-		User user = null;
-		user = userDao.getUserByName(u_name);
+		User user = userDao.getUserByName(u_name);
+		System.out.println(u_name);
 		
 		if (user != null) {
 			result = 0;
 			error = "Username is used.";
 		}
-		else if (u_pass == null || u_pass.equals(u_repass) == false) {
+		else if (u_pass.equals(u_repass) == false) {
 			result = 0;
 			error = "Twice passwords are different.";
 		}

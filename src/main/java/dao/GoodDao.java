@@ -9,7 +9,7 @@ public class GoodDao extends BaseDao {
 	
 	public List<Good> getGoodList(String key, String value) {
 		List<Good> list = null;
-		String sql = "select * from good where " + key + " = " + value;
+		String sql = "select * from good where " + key + " = \"" + value +"\"";
 		
 		try {
 			conn = this.getConection();
@@ -23,10 +23,11 @@ public class GoodDao extends BaseDao {
 				}
 				Good g = new Good(rs.getString("g_name"),
 						rs.getString("g_price"),rs.getString("g_pic"),
-						rs.getInt("g_ammount"),rs.getString("g_type"),
+						rs.getInt("g_amount"),rs.getString("g_type"),
 						rs.getString("u_name"));
 				g.setG_id(rs.getInt("g_id"));
 				list.add(g);
+				count++;
 			}
 		
 		} catch (Exception e) {
@@ -40,13 +41,13 @@ public class GoodDao extends BaseDao {
 	
 	public Good getGoodById(int g_id){
 		Good g = null;
-		String sql = "select * from good where g_id = " + g_id;
+		String sql = "select * from good where g_id = \"" + g_id +"\"";
 		try {
 			conn = this.getConection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			g = new Good();
 			if (rs.next()) {
+				g = new Good();
 	 			g.setG_id(rs.getInt("g_id"));
 	 			g.setG_name(rs.getString("g_name"));
 	 			g.setG_pic(rs.getString("g_pic"));
@@ -66,13 +67,14 @@ public class GoodDao extends BaseDao {
 	
 	public Good getGoodByName(String g_name){
 		Good g = null;
-		String sql = "select * from good where g_name = " + g_name;
+		String sql = "select * from good where g_name = \"" + g_name +"\"";
 		try {
 			conn = this.getConection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			g = new Good();
+			
 			if (rs.next()) {
+				g = new Good();
 	 			g.setG_id(rs.getInt("g_id"));
 	 			g.setG_name(rs.getString("g_name"));
 	 			g.setG_pic(rs.getString("g_pic"));

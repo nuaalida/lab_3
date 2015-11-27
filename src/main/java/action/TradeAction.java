@@ -11,11 +11,12 @@ import com.opensymphony.xwork2.ActionSupport;
 import bean.Trade;
 import dao.GoodDao;
 import dao.TradeDao;
+import pojo.TradePojo;
 
 public class TradeAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private Map<String, Object> dataMap = new HashMap<String, Object>();
-	private List<Trade> dataList = new ArrayList<Trade>();
+	private List<TradePojo> dataList = new ArrayList<TradePojo>();
 	private int g_id;
 	private String u_name;
 	private String t_color;
@@ -110,15 +111,15 @@ public class TradeAction extends ActionSupport {
 	/**
 	 * @return the dataList
 	 */
-	public List<Trade> getDataList() {
+	public List<TradePojo> getDataList() {
 		return dataList;
 	}
 
 	/**
-	 * @param dataList the dataList to set
+	 * @param list the dataList to set
 	 */
-	public void setDataList(List<Trade> dataList) {
-		this.dataList = dataList;
+	public void setDataList(List<TradePojo> list) {
+		this.dataList = list;
 	}
 	
 }

@@ -6,13 +6,13 @@ public class UserDao extends BaseDao {
 	
 	public User getUserByName(String u_name){
 		User u = null;
-		String sql = "select * from user where u_name = " + u_name;
+		String sql = "select * from user where u_name = \"" + u_name +"\"";
 		try {
 			conn = this.getConection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			u = new User();
 			if (rs.next()) {
+				u = new User();
 	 			u.setU_id(rs.getInt("u_id"));
 				u.setU_name(rs.getString("u_name"));
 				u.setU_pic(rs.getString("u_pic"));

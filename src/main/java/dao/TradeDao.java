@@ -4,29 +4,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.Trade;
+import pojo.TradePojo;
 
 public class TradeDao extends BaseDao {
 	
-	public List<Trade> getTradeList(String key, String value) {
-		List<Trade> list = null;
-		String sql = "select * from trade where "+ key +" = " + value;
+	public List<TradePojo> getTradeList(String key, String value) {
+		List<TradePojo> list = null;
+		String sql = "select t.g_id, t.t_color, t.t_count, t.t_type, t.t_time," +
+							"g.g_name, g.g_price, g.g_pic, g.g_amount " +
+					 "from trade t, good g" +
+					 "where t." +key+ "= \"" + value +"\" and " +
+					 "t.g_id = g.g_id";
+				
 		try {
 			conn = this.getConection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			Trade t = new Trade();
+			TradePojo t = new TradePojo();
 			int count = 0;
 			while (rs.next()) {
 				if (count == 0) {
-					list = new ArrayList<Trade>();
+					list = new ArrayList<TradePojo>();
 				}
 				t.setG_id(rs.getInt("g_id"));
-				t.setU_name(rs.getString("u_name"));
 				t.setT_color(rs.getString("t_color"));
 				t.setT_count(rs.getInt("t_count"));
 				t.setT_type(rs.getString("t_type"));
-				t.setT_time(rs.getDate("t_date"));
+				t.setT_time(rs.getDate("t_time"));
+				
+				t.setG_amount(rs.getInt("g_amount"));
+				t.setG_name(rs.getString("g_name"));
+				t.setG_pic(rs.getString("g_pic"));
+				t.setG_price(rs.getString("g_price"));
 				list.add(t);
 				count ++;
 			}

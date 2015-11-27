@@ -25,17 +25,17 @@ public class GoodAction extends ActionSupport {
 	public String goodListOfType() {
 		GoodDao gDao = new GoodDao();
 		dataList = gDao.getGoodList("g_type", g_type);
+		System.out.println(g_type);
 		return SUCCESS;
 	}
 	
 	public String addGood() {
 		int result = 1;
 		String error = null;
-		Good good = null;
 		GoodDao goodDao = new GoodDao();
-		good = goodDao.getGoodByName(g_name);
-		
-		if (good == null) {
+		Good good = goodDao.getGoodByName(g_name);
+	
+		if (good != null) {
 			result = 0;
 			error = "There's a same good in DB.";
 		}

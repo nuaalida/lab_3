@@ -9,7 +9,7 @@ public class FavoriteDao extends BaseDao {
 	
 	public List<Integer> getFavoriteList(String key,String value) {
 		List<Integer> list = null;
-		String sql = "select * from favorite where " + key + " = " + value;
+		String sql = "select * from favorite where " + key + " = \"" + value + "\"";
 		
 		try {
 			conn = this.getConection();
@@ -22,6 +22,7 @@ public class FavoriteDao extends BaseDao {
 					list = new ArrayList<Integer>();
 				}
 				list.add(rs.getInt("g_id"));
+				count++;
 			}
 		
 		} catch (Exception e) {
@@ -34,13 +35,14 @@ public class FavoriteDao extends BaseDao {
 	
 	public Favorite getFavoriteByName(String name) {
 		Favorite f = null;
-		String sql = "select * from favorite where u_name = " + name;
+		String sql = "select * from favorite where u_name = \"" + name +"\"";
 		conn = this.getConection();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			f = new Favorite();
+			
 			if (rs.next()) {
+				f = new Favorite();
 				f.setG_id(rs.getInt("g_id"));
 				f.setU_name(rs.getString("u_name"));
 			}

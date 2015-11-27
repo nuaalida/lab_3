@@ -4,17 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.Evaluation;
+import pojo.EvaluationPojo;
 
 public class EvaluationDao extends BaseDao {
 	public Evaluation getEvaluationByIdAndName(int g_id, String u_name) {
 		Evaluation e = null;
-		String sql = "select * from evaluation where u_name = " + u_name + " and g_id = " + g_id;
+		String sql = "select * from evaluation where u_name = \"" + u_name + 
+						"\" and g_id = \"" + g_id +"\"";
 		try {
 			conn = this.getConection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-			e = new Evaluation();
+			
 			if (rs.next()) {
+				e = new Evaluation();
 	 			e.setG_id(rs.getInt("g_id"));
 	 			e.setU_name(rs.getString("u_name"));
 	 			e.setE_text(rs.getString("e_text"));
@@ -30,9 +33,12 @@ public class EvaluationDao extends BaseDao {
 		return e;
 	}
 	
-	public List<Evaluation> getEvaluationList(String key,String value) {
-		List<Evaluation> list = null;
-		String sql = "select * from evaluation where " + key + " = " + value;
+	public List<EvaluationPojo> getEvaluationList(String key,String value) {
+		List<EvaluationPojo> list = null;
+		String sql = "select e.g_id, e.u_name, e.e_text, e.e_time, u.u_pic" +
+					"from evaluation e, user u" +
+					"where e." + key + "= \"" + value + "\" and" +
+					"e.u_name = u.u_name";
 		
 		try {
 			conn = this.getConection();
@@ -42,11 +48,13 @@ public class EvaluationDao extends BaseDao {
 			int count = 0;
 			while (rs.next()) {
 				if (count == 0) {
-					list = new ArrayList<Evaluation>();
+					list = new ArrayList<EvaluationPojo>();
 				}
-				Evaluation e = new Evaluation(rs.getInt("g_id"),rs.getString("u_name"),
-						rs.getString("e_text"),rs.getDate("e_time"));
+				EvaluationPojo e = new EvaluationPojo(rs.getInt("g_id"),
+						rs.getString("u_name"),rs.getString("e_text"),
+						rs.getDate("e_time"),rs.getString("u_pic"));
 				list.add(e);
+				count++;
 			}
 		
 		} catch (Exception e) {

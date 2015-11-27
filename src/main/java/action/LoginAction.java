@@ -20,14 +20,13 @@ public class LoginAction extends ActionSupport {
 		UserDao userDao = new UserDao();
 		
 		// validate
-		User user = null;
-		user = userDao.getUserByName(u_name);
+		User user = userDao.getUserByName(u_name);
 		
 		if (user == null) {
 			result = 0;
 			error = "Username doesn't exist.";
 		}
-		else if (user.getU_pass()==null || user.getU_pass().equals(u_pass) == false) {
+		else if (user.getU_pass().equals(u_pass) == false) {
 			result = 0;
 			error = "Username doesn't match password.";
 		}
