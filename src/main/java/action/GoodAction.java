@@ -21,6 +21,7 @@ public class GoodAction extends ActionSupport {
 	private int g_amount;
 	private String g_type;
 	private String u_name;
+	private String search;
 	
 	public String goodListOfType() {
 		System.out.println("goodlistoftype");
@@ -39,7 +40,7 @@ public class GoodAction extends ActionSupport {
 	
 	public String search() {
 		GoodDao gDao = new GoodDao();
-		dataList = gDao.search(g_name);
+		dataList = gDao.search(search);
 		
 		return SUCCESS;
 	}
@@ -149,6 +150,20 @@ public class GoodAction extends ActionSupport {
 
 	public void setDataList(List<Good> dataList) {
 		this.dataList = dataList;
+	}
+
+	/**
+	 * @return the search
+	 */
+	public String getSearch() {
+		return search;
+	}
+
+	/**
+	 * @param search the search to set
+	 */
+	public void setSearch(String search) {
+		this.search = search;
 	}
 	
 }

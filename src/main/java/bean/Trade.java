@@ -1,18 +1,16 @@
 package bean;
 
-import java.sql.Date;
-
 public class Trade {
 	private int g_id;
 	private String u_name;
 	private String t_color;
 	private String t_type;
 	private int t_count;
-	private Date t_time;
+	private String t_time;
 	
 	public Trade(){}
 	
-	public Trade(int g_id,String u_name,String t_color,String t_type,int t_count,Date t_time) {
+	public Trade(int g_id,String u_name,String t_color,String t_type,int t_count,String t_time) {
 		setG_id(g_id);
 		setU_name(u_name);
 		setT_color(t_color);
@@ -51,10 +49,13 @@ public class Trade {
 	public void setT_count(int t_count) {
 		this.t_count = t_count;
 	}
-	public Date getT_time() {
+
+	public String getT_time() {
 		return t_time;
 	}
-	public void setT_time(Date t_time) {
+
+	public void setT_time(String t_time) {
 		this.t_time = t_time;
 	}
+
 }

@@ -21,7 +21,7 @@ public class EvaluationDao extends BaseDao {
 	 			e.setG_id(rs.getInt("g_id"));
 	 			e.setU_name(rs.getString("u_name"));
 	 			e.setE_text(rs.getString("e_text"));
-	 			e.setE_time(rs.getDate("e_time"));
+	 			e.setE_time(rs.getString("e_time"));
 			}
 			
 		} catch (Exception e1) {
@@ -52,7 +52,7 @@ public class EvaluationDao extends BaseDao {
 				}
 				EvaluationPojo e = new EvaluationPojo(rs.getInt("g_id"),
 						rs.getString("u_name"),rs.getString("e_text"),
-						rs.getDate("e_time"),rs.getString("u_pic"));
+						rs.getString("e_time"),rs.getString("u_pic"));
 				list.add(e);
 				count++;
 			}
@@ -74,7 +74,7 @@ public class EvaluationDao extends BaseDao {
 			pstmt.setInt(1, e.getG_id());
 			pstmt.setString(2, e.getU_name());
 			pstmt.setString(3, e.getE_text());
-			pstmt.setDate(4, e.getE_time());
+			pstmt.setString(4, e.getE_time());
 			result = pstmt.executeUpdate();
 			
 		} catch (Exception e1) {

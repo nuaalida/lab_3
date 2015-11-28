@@ -1,7 +1,5 @@
 package action;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -43,8 +41,7 @@ public class EvaluationAction extends ActionSupport {
 		}
 		else {
 			try {
-				Date real_time = (Date) new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(e_time);
-				e = new Evaluation(g_id, u_name, e_text, real_time);
+				e = new Evaluation(g_id, u_name, e_text, e_time);
 				eDao.addEvaluation(e);
 			
 			} catch (Exception e1) {

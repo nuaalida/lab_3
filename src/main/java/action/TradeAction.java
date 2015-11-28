@@ -1,8 +1,6 @@
 package action;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +48,7 @@ public class TradeAction extends ActionSupport {
 	}
 	
 	public String addTrade() {
+		
 		int result = 1;
 		String error = null;
 		TradeDao tDao = new TradeDao();
@@ -62,9 +61,7 @@ public class TradeAction extends ActionSupport {
 		}
 		else {
 			try {
-				Date real_time = (Date) new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss").parse(t_time);
-				
-				t = new Trade(g_id, u_name, t_color, t_type, t_count, real_time);
+				t = new Trade(g_id, u_name, t_color, t_type, t_count, t_time);
 				tDao.addTrade(t);
 				
 			} catch (Exception e) {

@@ -24,8 +24,10 @@ public class FavoriteAction extends ActionSupport {
 		FavoriteDao fDao = new FavoriteDao();
 		List<Integer> list = fDao.getFavoriteList("u_name", u_name);
 		GoodDao gDao = new GoodDao();
-		for (int tmp_id : list) {
-			dataList.add(gDao.getGoodById(tmp_id));
+		if (list != null) {
+			for (int tmp_id : list) {
+				dataList.add(gDao.getGoodById(tmp_id));
+			}
 		}
 		
 		return SUCCESS;
@@ -44,22 +46,14 @@ public class FavoriteAction extends ActionSupport {
 	}
 	
 	public String addFavorite() {
+		System.out.println("addFavorite");
 		// validate
 		// addUser
 		int result = 1;
 		String error = null;
-		
 		FavoriteDao fDao = new FavoriteDao();
-		Favorite f = fDao.getFavoriteByName(u_name);
-		
-		if (f != null) {
-			result = 0;
-			error = "There a same favorite in db.";
-		}
-		else {
-			f = new Favorite(g_id, u_name);
-			fDao.addFavorite(f);
-		}
+		Favorite f = new Favorite(g_id, u_name);
+		fDao.addFavorite(f);
 		
 		dataMap.clear();
 		dataMap.put("result",result);

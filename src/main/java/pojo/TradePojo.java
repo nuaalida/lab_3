@@ -1,6 +1,5 @@
 package pojo;
 
-import java.sql.Date;
 
 public class TradePojo {
 	private int g_id;
@@ -8,7 +7,7 @@ public class TradePojo {
 	private String t_color;
 	private String t_type;
 	private int t_count;
-	private Date t_time;
+	private String t_time;
 	
 	private String g_name;
 	private String g_price;
@@ -45,11 +44,11 @@ public class TradePojo {
 	public void setT_count(int t_count) {
 		this.t_count = t_count;
 	}
-	public Date getT_time() {
+	public String getT_time() {
 		return t_time;
 	}
-	public void setT_time(Date t_time) {
-		this.t_time = t_time;
+	public void setT_time(String string) {
+		this.t_time = string;
 	}
 	public String getG_name() {
 		return g_name;
