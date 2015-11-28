@@ -1,7 +1,8 @@
 package action;
 
-import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.sql.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class TradeAction extends ActionSupport {
 	private String t_color;
 	private String t_type;
 	private int t_count;
-	private Date t_time;
+	private String t_time;
 	
 	public String tradeList() {
 		TradeDao tDao = new TradeDao();
@@ -31,11 +32,13 @@ public class TradeAction extends ActionSupport {
 	}
 	
 	public String checkTrade() {
+		System.out.println("checkTrade");
+		System.out.println(g_id + u_name);
+		
 		int result = 1;
 		String error = null;
 		
 		TradeDao tDao = new TradeDao();
-		//System.out.println(g_id + u_name);
 		
 		result = tDao.checkTrade(g_id, u_name);
 		
@@ -58,8 +61,15 @@ public class TradeAction extends ActionSupport {
 			error = "Inventory shortage.";
 		}
 		else {
-			t = new Trade(g_id, u_name, t_color, t_type, t_count, t_time);
-			tDao.addTrade(t);
+			try {
+				Date real_time = (Date) new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss").parse(t_time);
+				
+				t = new Trade(g_id, u_name, t_color, t_type, t_count, real_time);
+				tDao.addTrade(t);
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		
 		dataMap.clear();
@@ -116,13 +126,6 @@ public class TradeAction extends ActionSupport {
 		this.t_count = t_count;
 	}
 
-	public Date getT_time() {
-		return t_time;
-	}
-
-	public void setT_time(Date t_time) {
-		this.t_time = t_time;
-	}
 
 	/**
 	 * @return the dataList
@@ -136,6 +139,14 @@ public class TradeAction extends ActionSupport {
 	 */
 	public void setDataList(List<TradePojo> list) {
 		this.dataList = list;
+	}
+
+	public String getT_time() {
+		return t_time;
+	}
+
+	public void setT_time(String t_time) {
+		this.t_time = t_time;
 	}
 	
 }

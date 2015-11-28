@@ -1,6 +1,7 @@
 package action;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,7 +20,7 @@ public class EvaluationAction extends ActionSupport {
 	private int g_id;
 	private String u_name;
 	private String e_text;
-	private Date e_time;
+	private String e_time;
 	
 	public String evaluationList() {
 		EvaluationDao eDao = new EvaluationDao();
@@ -40,8 +41,14 @@ public class EvaluationAction extends ActionSupport {
 			error = "There existed a comment.";
 		}
 		else {
-			e = new Evaluation(g_id, u_name, e_text, e_time);
-			eDao.addEvaluation(e);
+			try {
+				Date real_time = (Date) new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(e_time);
+				e = new Evaluation(g_id, u_name, e_text, real_time);
+				eDao.addEvaluation(e);
+			
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		}
 		
 		dataMap.clear();
@@ -79,13 +86,6 @@ public class EvaluationAction extends ActionSupport {
 		this.e_text = e_text;
 	}
 	
-	public Date getE_time() {
-		return e_time;
-	}
-	public void setE_time(Date e_time) {
-		this.e_time = e_time;
-	}
-
 
 	/**
 	 * @return the dataList
@@ -100,5 +100,15 @@ public class EvaluationAction extends ActionSupport {
 	 */
 	public void setDataList(List<EvaluationPojo> list) {
 		this.dataList = list;
+	}
+
+
+	public String getE_time() {
+		return e_time;
+	}
+
+
+	public void setE_time(String e_time) {
+		this.e_time = e_time;
 	}
 }
