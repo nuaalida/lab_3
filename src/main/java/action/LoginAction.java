@@ -15,8 +15,10 @@ public class LoginAction extends ActionSupport {
 	private String u_pass;
 	
 	public String login() {
+		System.out.println("login");
 		int result = 1;
 		String error = null;
+		String u_pic = null;
 		UserDao userDao = new UserDao();
 		
 		// validate
@@ -30,11 +32,15 @@ public class LoginAction extends ActionSupport {
 			result = 0;
 			error = "Username doesn't match password.";
 		}
+		else {
+			u_pic = user.getU_pic();
+		}
 		
 		// output
 		dataMap.clear();
 		dataMap.put("result",result);
 		dataMap.put("error", error);
+		dataMap.put("u_pic", u_pic);
 		
 		return SUCCESS;
 	}

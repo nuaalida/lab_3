@@ -32,9 +32,8 @@ public class EvaluationAction extends ActionSupport {
 		int result = 1;
 		String error = null;
 		
-		Evaluation e = null;
 		EvaluationDao eDao = new EvaluationDao();
-		e = eDao.getEvaluationByIdAndName(g_id, u_name);
+		Evaluation e = eDao.getEvaluationByIdAndName(g_id, u_name);
  		
 		if (e != null) {
 			result = 0;

@@ -5,17 +5,22 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ImageUploadAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
+	private Map<String, Object> dataMap = new HashMap<String, Object>();
 	private String type = null;
-	private String fileName = null;
-	private String fileData = null;
+	private String imagename = null;
+	private String imagedata = null;
 	
 	public String upload()
 	{
+		int result = 1;
+		
 		String destDir = null;
 		if (type.equals("user")) {
 			destDir = "I:\\blank\\userimage\\";
@@ -24,11 +29,18 @@ public class ImageUploadAction extends ActionSupport {
 			destDir = "I:\\blank\\goodimage\\";
 		}
 		
-		String[] array = fileName.split("\\.");
+		String[] array = imagename.split("\\.");
 		String fileType = array[array.length-1];
 		
-	    uploadUtil(fileType, fileData, destDir);
-
+	    String imagepath = uploadUtil(fileType, imagedata, destDir);
+	    if (imagepath == null) {
+	    	result = 0;
+	    }
+	    
+	    dataMap.clear();
+		dataMap.put("result",result);
+		dataMap.put("imagepath", imagepath);
+	    
 	    return SUCCESS;
 	}
 	
@@ -43,7 +55,7 @@ public class ImageUploadAction extends ActionSupport {
 			dir.mkdir();
 		}
 		
-		String newFilePath = dirPath+"/"+newFileName+"."+fileType;
+		String newFilePath = dirPath+newFileName+"."+fileType;
 		FileInputStream in;
 		try {
 			in = new FileInputStream(new File(fileData));
@@ -56,7 +68,7 @@ public class ImageUploadAction extends ActionSupport {
 					in.close();
 					out.flush();
 					out.close();
-					return newFilePath;
+					return newFileName+"."+fileType;
 				}else
 					out.write(buffer,0,ins);
 			}
@@ -68,23 +80,35 @@ public class ImageUploadAction extends ActionSupport {
 		return null;
 	}
 	
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-	public String getFileData() {
-		return fileData;
-	}
-	public void setFileData(String fileData) {
-		this.fileData = fileData;
-	}
 	public String getType() {
 		return type;
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getImagename() {
+		return imagename;
+	}
+
+	public void setImagename(String imagename) {
+		this.imagename = imagename;
+	}
+
+	public String getImagedata() {
+		return imagedata;
+	}
+
+	public void setImagedata(String imagedata) {
+		this.imagedata = imagedata;
+	}
+
+	public Map<String, Object> getDataMap() {
+		return dataMap;
+	}
+
+	public void setDataMap(Map<String, Object> dataMap) {
+		this.dataMap = dataMap;
 	}
 	
 }

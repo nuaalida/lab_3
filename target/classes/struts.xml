@@ -8,9 +8,28 @@
     <constant name="struts.devMode" value="true" />
     <constant name="struts.i18n.reload" value="true" />
     <constant name="struts.configuration.xml.reload" value="true" ></constant>
-
+    <constant name="struts.multipart.saveDir" value="I:\\tmp" />
+    
     <package name="main" namespace="/" extends="struts-default, json-default">
     
+        <action name="upload" class="action.ImageUploadAction" method="upload">
+            
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        
+        
+        <action name="download" class="action.ImageDownloadAction" method="download">
+            <result type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">targetfile</param>
+                <param name="contentLength">${filesize}</param>
+                <param name="bufferSize">204800</param>
+            </result>
+        </action>
+       
+        
         <action name="image" class="action.ImageUploadAction" method="upload">
             <result >
                 <param name="root">dataMap</param>

@@ -31,15 +31,18 @@ public class TradeAction extends ActionSupport {
 	}
 	
 	public String checkTrade() {
+		int result = 1;
 		String error = null;
 		
 		TradeDao tDao = new TradeDao();
-		System.out.println(g_id + u_name);
-		int result = tDao.checkTrade(g_id, u_name);
-		System.out.println(result);
+		//System.out.println(g_id + u_name);
+		
+		result = tDao.checkTrade(g_id, u_name);
+		
 		dataMap.clear();
 		dataMap.put("result",result);
 		dataMap.put("error", error);
+		
 		return SUCCESS;
 	}
 	

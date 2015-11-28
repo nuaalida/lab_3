@@ -29,6 +29,13 @@ public class GoodAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String recommend() {
+		GoodDao gDao = new GoodDao();
+		dataList = gDao.recommend(u_name);
+		
+		return SUCCESS;
+	}
+	
 	public String addGood() {
 		int result = 1;
 		String error = null;
@@ -54,9 +61,7 @@ public class GoodAction extends ActionSupport {
 	public String changeGood() {
 		int result = 1;
 		String error = null;
-		
-		
-		
+	
 		dataMap.clear();
 		dataMap.put("result",result);
 		dataMap.put("error", error);
@@ -65,10 +70,10 @@ public class GoodAction extends ActionSupport {
 	}
 	
 	public String deleteGood() {
-		int result = 1;
 		String error = null;
 		
-		
+		GoodDao goodDao = new GoodDao();
+		int result = goodDao.deleteGood(g_id);
 		
 		dataMap.clear();
 		dataMap.put("result",result);

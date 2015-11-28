@@ -7,6 +7,27 @@ import bean.Good;
 
 public class GoodDao extends BaseDao {
 	
+	public List<Good> recommend(String u_name) {
+		List<Good> list = null;
+		String sql1 = "select ";
+		String sql2 = "";
+		String sql3 = "";
+		
+		try {
+			conn = this.getConection();
+			pstmt = conn.prepareStatement(sql1);
+			rs = pstmt.executeQuery();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.closeAll(conn, pstmt, rs);
+		}	
+		
+		return list;
+	}
+	
+	
 	public List<Good> getGoodListByType(String key, String value) {
 		List<Good> list = null;
 		String sql = "select * from good where " + key + " = \"" + value +"\"";
@@ -37,6 +58,22 @@ public class GoodDao extends BaseDao {
 		}
 		
 		return list;
+	}
+	
+	public int deleteGood(int g_id){
+		int result = 0;
+		String sql = "delete from good where g_id=" + g_id;
+		try {
+			conn = this.getConection();
+			pstmt = conn.prepareStatement(sql);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.closeAll(conn, pstmt, rs);
+		}
+		return result;
 	}
 	
 	public Good getGoodById(int g_id){
