@@ -9,14 +9,105 @@ public class GoodDao extends BaseDao {
 	
 	public List<Good> recommend(String u_name) {
 		List<Good> list = null;
-		String sql1 = "select ";
-		String sql2 = "";
-		String sql3 = "";
+		String[] sql = new String[2];
+		sql[0] = "select * from good " + 
+				" where u_name in (select u_name from good "
+				+ "					where g_id in (select g_id from trade "
+				+ "									where u_name = ? ) ) "
+				+ " and "
+				+ " g_id not in (select g_id from trade where u_name = ? ) ";
+		sql[1] = "select * from good " + 
+				" where u_name in (select u_name from good "
+				+ "					where g_id in (select g_id from favorite "
+				+ "									where u_name = ? ) ) "
+				+ " and "
+				+ " g_id not in (select g_id from favorite where u_name = ? ) ";;
+		
+		int count = 0;		
+		for (String sqlitem : sql) {
+			try {
+				conn = this.getConection();
+				pstmt = conn.prepareStatement(sqlitem);
+				pstmt.setString(1, u_name);
+				pstmt.setString(2, u_name);
+				rs = pstmt.executeQuery();
+				
+				while (rs.next() && count<10) {
+					if (count == 0) {
+						list = new ArrayList<Good>();
+					}
+					Good g = new Good(rs.getString("g_name"),
+							rs.getString("g_price"),rs.getString("g_pic"),
+							rs.getInt("g_amount"),rs.getString("g_type"),
+							rs.getString("u_name"));
+					g.setG_id(rs.getInt("g_id"));
+					list.add(g);
+					count++;
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				this.closeAll(conn, pstmt, rs);
+			}
+		}
+		
+		if (count<10) {
+			String sqlitem = "select * from good order by rand() limit 0, ?";
+			try {
+				conn = this.getConection();
+				pstmt = conn.prepareStatement(sqlitem);
+				pstmt.setInt(1, 10-count);
+				rs = pstmt.executeQuery();
+				
+				while (rs.next() && count<10) {
+					if (count == 0) {
+						list = new ArrayList<Good>();
+					}
+					Good g = new Good(rs.getString("g_name"),
+							rs.getString("g_price"),rs.getString("g_pic"),
+							rs.getInt("g_amount"),rs.getString("g_type"),
+							rs.getString("u_name"));
+					g.setG_id(rs.getInt("g_id"));
+					list.add(g);
+					count++;
+				}
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				this.closeAll(conn, pstmt, rs);
+			}
+			
+		}
+		
+		return list;
+	}
+	
+	public List<Good> search(String key) {
+		List<Good> list = null;
+		String sql = "select * from good " +
+						" where locate(?,g_name) > 0";
 		
 		try {
 			conn = this.getConection();
-			pstmt = conn.prepareStatement(sql1);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, key);
 			rs = pstmt.executeQuery();
+			
+			int count = 0;
+			while (rs.next()) {
+				if (count == 0) {
+					list = new ArrayList<Good>();
+				}
+				Good g = new Good(rs.getString("g_name"),
+						rs.getString("g_price"),rs.getString("g_pic"),
+						rs.getInt("g_amount"),rs.getString("g_type"),
+						rs.getString("u_name"));
+				g.setG_id(rs.getInt("g_id"));
+				list.add(g);
+				count++;
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -26,7 +117,6 @@ public class GoodDao extends BaseDao {
 		
 		return list;
 	}
-	
 	
 	public List<Good> getGoodListByType(String key, String value) {
 		List<Good> list = null;

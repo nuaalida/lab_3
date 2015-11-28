@@ -23,6 +23,7 @@ public class EvaluationAction extends ActionSupport {
 	private String e_time;
 	
 	public String evaluationList() {
+		System.out.println("evaluationList");
 		EvaluationDao eDao = new EvaluationDao();
 		setDataList(eDao.getEvaluationList("g_id", Integer.toString(g_id)));
 		return SUCCESS;

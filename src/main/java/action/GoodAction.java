@@ -23,6 +23,7 @@ public class GoodAction extends ActionSupport {
 	private String u_name;
 	
 	public String goodListOfType() {
+		System.out.println("goodlistoftype");
 		GoodDao gDao = new GoodDao();
 		dataList = gDao.getGoodListByType("g_type", g_type);
 		System.out.println(g_type);
@@ -32,6 +33,13 @@ public class GoodAction extends ActionSupport {
 	public String recommend() {
 		GoodDao gDao = new GoodDao();
 		dataList = gDao.recommend(u_name);
+		
+		return SUCCESS;
+	}
+	
+	public String search() {
+		GoodDao gDao = new GoodDao();
+		dataList = gDao.search(g_name);
 		
 		return SUCCESS;
 	}

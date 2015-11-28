@@ -20,6 +20,7 @@ public class FavoriteAction extends ActionSupport {
 	private String u_name;
 	
 	public String favoriteList() {
+		System.out.println("favoriteList");
 		FavoriteDao fDao = new FavoriteDao();
 		List<Integer> list = fDao.getFavoriteList("u_name", u_name);
 		GoodDao gDao = new GoodDao();

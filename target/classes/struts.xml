@@ -68,6 +68,22 @@
             </result>
         </action>
         
+        <action name="recommend" class="action.GoodAction" method="recommend">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataList</param>
+            </result>
+        </action>
+        
+        <action name="search" class="action.GoodAction" method="search">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataList</param>
+            </result>
+        </action>
+        
         <action name="checkfavorite" class="action.FavoriteAction" method="checkFavorite">
             <interceptor-ref name="json">
             </interceptor-ref>
