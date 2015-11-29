@@ -26,6 +26,7 @@ public class TradeAction extends ActionSupport {
 	public String tradeList() {
 		TradeDao tDao = new TradeDao();
 		setDataList(tDao.getTradeList("u_name", u_name));
+		//System.out.println(dataList.toString());
 		return SUCCESS;
 	}
 	

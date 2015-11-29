@@ -42,12 +42,14 @@ public class TradeDao extends BaseDao {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			TradePojo t = new TradePojo();
+			
 			int count = 0;
 			while (rs.next()) {
 				if (count == 0) {
 					list = new ArrayList<TradePojo>();
 				}
+				
+				TradePojo t = new TradePojo();
 				t.setG_id(rs.getInt("g_id"));
 				t.setT_color(rs.getString("t_color"));
 				t.setT_count(rs.getInt("t_count"));
@@ -58,6 +60,8 @@ public class TradeDao extends BaseDao {
 				t.setG_name(rs.getString("g_name"));
 				t.setG_pic(rs.getString("g_pic"));
 				t.setG_price(rs.getString("g_price"));
+				
+				System.out.println(t.toString());
 				list.add(t);
 				count ++;
 			}

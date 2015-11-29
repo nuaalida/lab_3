@@ -32,6 +32,7 @@ public class GoodAction extends ActionSupport {
 	}
 	
 	public String recommend() {
+		System.out.println("recommend");
 		GoodDao gDao = new GoodDao();
 		dataList = gDao.recommend(u_name);
 		
