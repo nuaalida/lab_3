@@ -60,7 +60,23 @@
             </result>
         </action>
         
+        <action name="deletegood" class="action.GoodAction" method="deleteGood">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataMap</param>
+            </result>
+        </action>
+        
         <action name="goodlistoftype" class="action.GoodAction" method="goodListOfType">
+            <interceptor-ref name="json">
+            </interceptor-ref>
+            <result type="json">
+                <param name="root">dataList</param>
+            </result>
+        </action>
+        
+        <action name="goodlistofseller" class="action.GoodAction" method="goodListOfSeller">
             <interceptor-ref name="json">
             </interceptor-ref>
             <result type="json">

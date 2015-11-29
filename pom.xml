@@ -7,6 +7,7 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>blank Maven Webapp</name>
   <url>http://maven.apache.org</url>
+
   <dependencies>
   
     <dependency>
@@ -41,6 +42,7 @@
 	</dependency>
     
   </dependencies>
+  
   <build>
     <finalName>blank</finalName>
   </build>

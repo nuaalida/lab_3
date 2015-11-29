@@ -64,6 +64,7 @@ public class TradeAction extends ActionSupport {
 			try {
 				t = new Trade(g_id, u_name, t_color, t_type, t_count, t_time);
 				tDao.addTrade(t);
+				gDao.deleteAmount(g_id, t_count);
 				
 			} catch (Exception e) {
 				e.printStackTrace();

@@ -7,6 +7,56 @@ import bean.Good;
 
 public class GoodDao extends BaseDao {
 	
+	public void deleteAmount(int g_id, int t_count){
+		String sql = "update good set g_amount = g_amount - ? where g_id = " + g_id;
+		try {
+			conn = this.getConection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, t_count);
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.closeAll(conn, pstmt, rs);
+		}
+		
+		
+	}
+	
+	public List<Good> getGoodListBySeller(String u_name) {
+		List<Good> list = null;
+		String sql = "select * from good where u_name = \"" + u_name +"\"";
+		
+		try {
+			conn = this.getConection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			int count = 0;
+			while (rs.next()) {
+				if (count == 0) {
+					list = new ArrayList<Good>();
+				}
+				Good g = new Good(rs.getString("g_name"),
+						rs.getString("g_price"),rs.getString("g_pic"),
+						rs.getInt("g_amount"),rs.getString("g_type"),
+						rs.getString("u_name"));
+				g.setG_id(rs.getInt("g_id"));
+				list.add(g);
+				count++;
+			}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			this.closeAll(conn, pstmt, rs);
+		}
+		
+		
+		return list;
+	}
+	
 	public List<Good> recommend(String u_name) {
 		List<Good> list = null;
 		String[] sql = new String[2];
